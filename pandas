@@ -1,0 +1,11 @@
+cmd
+
+jupyter (pandas 설치 및 실행)
+
+설치
+$ pip install jupyter
+
+실행
+$ jupyter notebook
+
+
