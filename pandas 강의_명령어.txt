@@ -9,6 +9,10 @@ $ jupyter notebook
 끝내기
 $ ctrl + c
 
+판다스 설정
+import pandas as pd
+
+
 pd.read_csv('파일명')
 : 파일을 불러오는 함수
 
@@ -145,4 +149,67 @@ df3.to_csv('result.csv')
 한글데이터가 깨져서 나올때 방지방법
 df3.to_csv('result.csv',encoding='cp949')
 : encoding='cp949' 를 넣어준다.
+
+* 데이터 전처리 *
+데이터를 가져왔을때 가장 먼저 해야할 행동들
+1. 데이터 구조를 확인한다.(주로 정형데이터)
+
+
+                정형데이터   Column / Row / Value
+         구조관점  반정형      HTML / XML
+		        비정형      SNS / Image / Video
+		 
+                실시간		 IoT / System log
+수집데이터-  시간관점  비실시간    Statistic / Web log
+
+
+                 파일    Excel / Cav
+          저장형태  DB     RDBMS / NoSQL / In Memory
+                 콘텐츠   Text / Image / Video
+				 스트림   Transaction / HTTP
+				 
+
+df1['카테고리'].unique()
+: 범주형 데이터 항목을 보여줌
+
+df1['카테고리'].value_counts()
+: 범주형 데이터 항목의 갯수
+
+df1['카테고리'].describe()
+: 범주형에 대한 통계량을 계산하여 출력함
+
+df1[['발주가능상태','카테고리','상품명']].describe()
+
+: 범주형 조건에 대한 통계량
+
+* 공공 데이터 가져오는곳 *
+https://www.data.go.kr/index.do
+
+* 데이터 결측치(나오지 않거나 에러등) 보기 및 출력
+shop.isnull().sum()
+
+* 결측치 시각과 하여 보여주기 (missingno 사용)
+import missingno as msno
+msno.matrix(shop)
+: 한글 깨침이 발생한다. 어떻게 처리할 수 있을까?
+
+* 라이브러리가 설치되어있는지 확인하기
+pip show numpy
+
+* 시각화 라이브러리
+matplotlib
+seborn
+https://seaborn.pydata.org/examples/anscombes_quartet.html
+import seaborn as sns
+sns.set_theme(style="ticks")
+
+# Load the example dataset for Anscombe's quartet
+df = sns.load_dataset("anscombe")
+
+# Show the results of a linear regression within each dataset
+sns.lmplot(x="x", y="y", col="dataset", hue="dataset", data=df,
+           col_wrap=2, ci=None, palette="muted", height=4,
+           scatter_kws={"s": 50, "alpha": 1})
+		   
+		   
 
